@@ -1,12 +1,39 @@
+import axios from "axios";
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import WeatherDisplay from "./WeatherDisplay";
+
+const BASE_URL = "https://api.weatherapi.com/v1";
+const API_KEY = "caf2ebe3b95c4c59be655137232108";
 
 const Home = () => {
   const [city, setCity] = useState("");
-  const handleSubmit = () => {
+  const [weatherData, setWeatherData] = useState();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     console.log(city);
-    setCity("");
+    try {
+      const response = await getWeatherData(city);
+      console.log(response);
+      setCity("");
+      setWeatherData(response);
+    } catch (error) {
+      console.error("Error getting weather data:", error);
+    }
   };
+  
+  const getWeatherData = async (city: string) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/current.json?key=${API_KEY}&q=${city}`);
+      const data = response.data; 
+      return data;
+    } catch (error) {
+      console.error("Error getting weather data:", error); 
+      throw error;
+    }
+  };
+  
 
   return (
     <>
@@ -38,6 +65,7 @@ const Home = () => {
             </button>
           </form>
         </div>
+        {weatherData && <WeatherDisplay weatherData={weatherData} />}
       </div>
     </>
   );
