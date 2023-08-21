@@ -30,11 +30,11 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
     : (current.temp_c * 9) / 5 + 32;
 
   return (
-    <div className="weather-display">
-      <h2 className="text-[1.4rem]">
-        <span className="text-[1.4rem] font-bold">City:</span> {location.name}
-      </h2>
-      <div className="weather-info">
+    <div className="mt-[1.2rem] flex gap-[1.5rem]">
+      <div className="flex flex-col gap-[.5rem]">
+        <p className="text-[1.4rem]">
+          <span className="text-[1.4rem] font-bold">City:</span> {location.name}
+        </p>
         <p className="text-[1.4rem]">
           <span className="text-[1.4rem] font-bold">Temperature:</span>{" "}
           {temperature.toFixed(2)} {isCelsius ? "°C" : "°F"}
@@ -43,14 +43,20 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
           <span className="text-[1.4rem] font-bold">Weather:</span>{" "}
           {current.condition.text}
         </p>
-        <img src={current.condition.icon} alt="Weather icon" />
+        <button
+          onClick={toggleTemperature}
+          className="mt-2 bg-[#5d87ff] hover:bg-[#5075db] text-[1.2rem] text-white px-4 py-2 rounded"
+        >
+          Toggle Temperature
+        </button>
       </div>
-      <button
-        onClick={toggleTemperature}
-        className="mt-2 bg-[#5d87ff] hover:bg-[#5075db] text-white px-4 py-2 rounded"
-      >
-        Toggle Temperature
-      </button>
+      <div className="">
+        <img
+          src={current.condition.icon}
+          alt="Weather icon"
+          className="h-[10rem]"
+        />
+      </div>
     </div>
   );
 };
