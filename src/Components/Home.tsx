@@ -50,7 +50,7 @@ const Home = () => {
               <input
                 type="text"
                 id="city"
-                placeholder="Enter city name"
+                placeholder="Search for a City"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 className="p-[1rem] text-[1.2rem] border border-[#0000001a] rounded-md focus:border-[#5d87ff] focus:outline-none"
