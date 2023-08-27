@@ -3,8 +3,9 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import WeatherDisplay from "./WeatherDisplay";
 
-const BASE_URL = "https://api.weatherapi.com/v1";
-const API_KEY = "caf2ebe3b95c4c59be655137232108";
+
+const API_URL = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const Home = () => {
   const [city, setCity] = useState("");
@@ -26,7 +27,7 @@ const Home = () => {
   const getWeatherData = async (city: string) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/current.json?key=${API_KEY}&q=${city}`
+        `${API_URL}/current.json?key=${API_KEY}&q=${city}`
       );
       const data = response.data;
       return data;
